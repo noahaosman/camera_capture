@@ -26,7 +26,7 @@ for (( i=0; i<$numcams; i++ )); do
   bus=`v4l2-ctl --all --device $thiscam | grep usb-`
   busnum="${bus:0-1}"
   # create the command
-  command+="/usr/bin/gst-launch-1.0 -v v4l2src device=$thiscam ! video/x-h264, width=1920,height=1080,framerate=30/1 ! h264parse ! queue ! mp4mux ! filesink location=$outpath/camera_${busnum}_$now.mp4 -e"
+  command+="/usr/bin/gst-launch-1.0 -v v4l2src device=$thiscam ! video/x-h264, width=1920,height=1080,framerate=30/1 ! h264parse ! queue ! mpegtsmux ! filesink location=$outpath/camera_${busnum}_$now.mp4 -e"
   if [[ "$i" -lt "$numcams-1" ]]; then
     command+=" | "
   fi
