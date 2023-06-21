@@ -52,10 +52,14 @@ if [ ! -d $basefolder/output ]; then
 fi
 chown -R pi:pi $basefolder/output
 
-# set up the systemd service file
+# set up the systemd service files
 sudo cp $basefolder/camera.service /etc/systemd/system/.
+sudo cp $basefolder/camera_restart.service /etc/systemd/system/.
+sudo cp $basefolder/camera_restart.timer /etc/systemd/system/.
 systemctl daemon-reload
 systemctl enable camera  # tells the camera service to start on boot
+systemctl enable camera_restart.timer  # tells the timer to start on boot
 
 # start the camera script
 # systemctl start camera
+# systemctl start camera_restart.timer

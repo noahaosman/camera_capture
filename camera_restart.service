@@ -1,0 +1,10 @@
+[Unit]
+Description=Restarts the Capture Camera Video service
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=systemctl restart camera
+
+[Install]
+WantedBy=default.target

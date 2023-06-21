@@ -1,0 +1,9 @@
+[Unit]
+Description=5 minute timer
+
+[Timer]
+OnCalendar=*:0/5
+Unit=camera_restart.service
+
+[Install]
+WantedBy=basic.target  
