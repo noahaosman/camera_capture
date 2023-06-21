@@ -10,6 +10,33 @@ if [[ "$user" != "root" ]]; then
   exit 1
 fi
 
+# Enable legacy camera support (if bullseye) 
+command -v raspi-config && (
+    echo "Running in a Raspiberry."
+    if [ $(lsb_release -sc) == "bullseye" ];
+    then
+        raspi-config nonint get_legacy 1> /dev/null && (
+            echo "Enabling legacy camera support."
+            raspi-config nonint do_legacy 0
+        )
+    else
+        echo "Not on bullseye - no need to enable legacy camera support"
+    fi
+)
+
+# install gstreamer requirements
+sudo apt-get install libx264-dev libjpeg-dev
+
+sudo apt-get install libgstreamer1.0-dev \
+libgstreamer-plugins-base1.0-dev \
+libgstreamer-plugins-bad1.0-dev \
+gstreamer1.0-plugins-ugly \
+gstreamer1.0-tools \
+gstreamer1.0-gl \
+gstreamer1.0-gtk3 
+
+
+# location for the camera capture code 
 basefolder="/home/pi/camera_capture"
 
 # create a folder for the output video files
