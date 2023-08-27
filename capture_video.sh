@@ -1,10 +1,13 @@
 #!/bin/bash
 #
 # Script to capture the video feeds from multiple cameras at the same time.
-# The output MP4 files will be placed in /home/pi/camera_capture/output.
+# The output MP4 files will be placed in /media/usb-drive.
 
 # define the output file location
-outpath="/home/pi/camera_capture/output"
+# outpath="/home/pi/camera_capture/output"
+outpath="/media/usb-drive"
+sudo mkdir $outpath
+sudo mount -o umask=000 /dev/sda1 $outpath
 
 # get the current date for the output filename
 now=`date +%Y%m%d%H%M%S`
@@ -35,4 +38,3 @@ echo $command
 
 # run the command
 eval "$command"
-
