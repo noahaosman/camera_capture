@@ -6,6 +6,7 @@ After=default.target
 User=pi
 Group=pi
 Type=simple
+ExecStartPre=/home/pi/camera_capture/sleepy_time.sh
 ExecStart=/home/pi/camera_capture/capture_video.sh
 KillSignal=SIGINT
 StandardOutput=append:/var/log/camera.log

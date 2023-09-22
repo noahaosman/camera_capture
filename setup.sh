@@ -60,6 +60,10 @@ systemctl daemon-reload
 systemctl enable camera  # tells the camera service to start on boot
 systemctl enable camera_restart.timer  # tells the timer to start on boot
 
+# add code to .bashrc that will mount USB drive on boot
+/home/pi/.bashrc >> "sudo mkdir /media/usb-drive
+sudo mount /dev/sda1 /media/usb-drive -o uid=pi,gid=pi"
+
 # start the camera script
-# systemctl start camera
-# systemctl start camera_restart.timer
+systemctl start camera
+systemctl start camera_restart.timer

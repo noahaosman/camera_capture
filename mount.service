@@ -1,0 +1,14 @@
+[Unit]
+Description=mount USB drive
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/camera_capture
+User=pi
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=mount
+ExecStart=/home/pi/camera_capture/mount_USB_drive.sh
+
+[Install]
+WantedBy=multi-user.target
