@@ -3,11 +3,10 @@ Description=Capture Camera Video
 After=default.target
 
 [Service]
-User=pi
-Group=pi
+User=root
+Group=root
 Type=simple
-ExecStartPre=/home/pi/camera_capture/sleepy_time.sh
-ExecStart=/home/pi/camera_capture/capture_video.sh
+ExecStart=/bin/bash -c "/home/pi/camera_capture/capture_video.sh & /home/pi/camera_capture/rename_files.sh && fg"
 KillSignal=SIGINT
 StandardOutput=append:/var/log/camera.log
 StandardError=append:/var/log/camera.log

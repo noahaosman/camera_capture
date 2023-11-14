@@ -1,9 +1,0 @@
-[Unit]
-Description=30 minute timer
-
-[Timer]
-OnCalendar=*:0/30
-Unit=camera_restart.service
-
-[Install]
-WantedBy=basic.target  
