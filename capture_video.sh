@@ -11,12 +11,16 @@ mkdir $outpath
 mount -o umask=000 /dev/sda1 $outpath
 
 # Run file re-naming script in the background
-/home/pi/camera_capture/rename_files.sh &
+#/home/pi/camera_capture/rename_files.sh &
 
 # get the current date for the output filename
 now=`date +%Y%m%d%H%M%S`
 
 echo ---"$now"--- >> /home/pi/data/capturevid.log
+
+# make deployment directory
+outpath="$outpath"/"$now"
+mkdir $outpath
 
 # get list of cameras
 camlist=`/home/pi/camera_capture/find_camera.sh`
