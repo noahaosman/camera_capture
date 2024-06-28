@@ -51,6 +51,11 @@ if [ ! -d $basefolder/output ]; then
 fi
 chown -R pi:pi $basefolder/output
 
+# setup output directory
+outpath="/media/usb-drive"
+mkdir $outpath
+chattr +i $outpath # make unwritable when drive is not mounted
+
 # set up the systemd service files
 sudo cp $basefolder/camera.service /etc/systemd/system/.
 systemctl daemon-reload
