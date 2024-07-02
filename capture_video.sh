@@ -14,7 +14,7 @@ mount -o umask=000 /dev/sda1 $outpath
 /home/pi/camera_capture/rename_files.sh &
 
 # get the current date for the output filename
-now=`date +%Y%m%d%H%M%S`
+now=`date +%Y%m%dT%H%M%S`
 
 echo ---"$now"--- >> /home/pi/data/capturevid.log
 

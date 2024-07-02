@@ -6,8 +6,8 @@ filesink="camera_*_[0-9][0-9][0-9][0-9].mp4"
 
 # find all files that:
 #   1) fit default file sink naming format
-#   2) were last modified at least 10 seconds ago
-filelist=`find "$outpath" -maxdepth 2 -name "$filesink" -mmin +0.167`
+#   2) were last modified at least 5 minutes
+filelist=`find "$outpath" -maxdepth 2 -name "$filesink" -mmin +5`
 
 for FILE in $filelist; do 
     
@@ -15,7 +15,7 @@ for FILE in $filelist; do
     cam=${FILE/[0-9][0-9][0-9][0-9].mp4}
 
     # get creation time and clean up into the format we want
-    birth=`stat -c '%w' $FILE | cut -f1 -d"." |  tr -d "\-\ \:"`
+    birth=`stat -c '%w' $FILE | cut -f1 -d"." |  tr -d "\-\:"` | tr ' ' 'T'
 
     # rename file using creation time
     mv $FILE $cam$birth".mp4"
