@@ -4,23 +4,28 @@ outpath="/media/usb-drive"
 
 filesink="camera_*_[0-9][0-9][0-9][0-9].mp4"
 
-# find all files that:
-#   1) fit default file sink naming format
-#   2) were last modified at least 5 minutes
-filelist=`find "$outpath" -maxdepth 2 -name "$filesink" -mmin +5`
 
-for FILE in $filelist; do 
-    
-    # remove default indexing from file name
-    cam=${FILE/[0-9][0-9][0-9][0-9].mp4}
+while true; do
+    # find all files that:
+    #   1) fit default file sink naming format
+    #   2) were last modified at least 5 minutes
+    filelist=`find "$outpath" -maxdepth 2 -name "$filesink" -mmin +5`
 
-    # get creation time and clean up into the format we want
-    birth=`stat -c '%w' $FILE | cut -f1 -d"." |  tr -d "\-\:"` | tr ' ' 'T'
 
-    # rename file using creation time
-    mv $FILE $cam$birth".mp4"
-    echo $FILE" --> "$cam$birth".mp4"
+    for FILE in $filelist; do 
+        
+        # remove default indexing from file name
+        cam=${FILE/[0-9][0-9][0-9][0-9].mp4}
+
+        # get creation time and clean up into the format we want
+        birth=`stat -c '%w' $FILE | cut -f1 -d"." |  tr -d "\-\:" | tr ' ' 'T'`
+
+        # rename file using creation time
+        mv $FILE $cam$birth".mp4"
+        echo $FILE" --> "$cam$birth".mp4"
+
+    done
+
+    sleep 60
 
 done
-
-sleep 5
