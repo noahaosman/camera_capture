@@ -60,6 +60,5 @@ echo $avail
 if [ $avail -gt 1000000 ]
 then
         # run the command
-        echo "$command" >> /home/pi/data/capturevid.log
-        eval "$command >> /home/pi/data/capturevid.log"
+        eval "$command"
 fi
