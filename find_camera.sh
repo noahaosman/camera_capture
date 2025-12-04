@@ -11,8 +11,8 @@ numdevs=${#devarray[@]}
 for (( i=0; i<$numdevs; i++ )); do
   thisdev=${devarray[$i]}
   if [ "$thisdev" != "" ]; then
-    # check to see if its an H264 device
-    format=`v4l2-ctl --list-formats --device $thisdev | grep H264`
+    # check to see if its an MJPG device
+    format=`v4l2-ctl --list-formats --device $thisdev | grep MJPG`
     if [ "$format" != "" ]; then
       # make sure it's the camera
       type=`v4l2-ctl --all --device $thisdev | grep stellarHD`
