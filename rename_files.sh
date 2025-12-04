@@ -6,6 +6,10 @@ filesink="camera_*_[0-9][0-9][0-9][0-9].mp4"
 
 
 while true; do
+
+    # Wait for any file in the output path to be modified
+    inotifywait -e create "$outpath"
+
     # find all files that:
     #   1) fit default file sink naming format
     #   2) were last modified at least 5 minutes
@@ -26,6 +30,6 @@ while true; do
 
     done
 
-    sleep 60
+    # sleep 60
 
 done

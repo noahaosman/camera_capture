@@ -8,7 +8,7 @@ outpath="/media/usb-drive"
 
 # mount the drive
 mkdir $outpath
-mount -o umask=000 /dev/sda1 $outpath
+mount /dev/sda1 $outpath
 
 # Run file re-naming script in the background
 /home/pi/camera_capture/rename_files.sh &
@@ -35,6 +35,7 @@ numcams=${#camarray[@]}
 command="/usr/bin/gst-launch-1.0 -v "
 for (( i=0; i<$numcams; i++ )); do
   thiscam=${camarray[$i]}
+  echo "$thiscam" >> /home/pi/data/capturevid.log
   # get the hardware port number the camera is attached to
   bus=`v4l2-ctl --all --device $thiscam | grep usb-`
   busnum="${bus:0-1}"
