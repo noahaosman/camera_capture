@@ -93,10 +93,10 @@ for (( i=0; i<$numcams; i++ )); do
 
   ##New DWEs:
   command+="\
-  v4l2src device=/dev/video0 ! \
+  v4l2src device=$thiscam ! \
   image/jpeg,width=1600,height=1200,framerate=60/1 ! \
   jpegparse ! \
-  avimux ! filesink location=$outpath/out.avi\
+  avimux ! filesink location=$outpath/out_${busnum}.avi\
   "
 
 done
